@@ -1,0 +1,1408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MyoSynex — Video Editing Template</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #044872;
+    --teal: #009BA6;
+    --white: #ffffff;
+    --off-white: #f7f5f0;
+    --light-bg: #f0f4f8;
+    --text-dark: #0d1b2a;
+    --text-mid: #3d5166;
+    --text-light: #6b7f90;
+    --border: #d8e2ec;
+
+    --learn: #ffffff;
+    --learn-bg: #044872;
+    --nutrition: #55a56e;
+    --nutrition-bg: #e8f5ed;
+    --movement: #e6781e;
+    --movement-bg: #fdf1e8;
+    --wellness: #e14b5a;
+    --wellness-bg: #fdedef;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Montserrat', sans-serif;
+    background: var(--off-white);
+    color: var(--text-dark);
+    font-size: 13px;
+    line-height: 1.6;
+  }
+
+  /* ── COVER ── */
+  .cover {
+    background: var(--navy);
+    color: #fff;
+    padding: 64px 72px 56px;
+    min-height: 260px;
+    position: relative;
+    overflow: hidden;
+  }
+  .cover::before {
+    content: '';
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 360px; height: 360px;
+    border-radius: 50%;
+    background: rgba(0,155,166,0.18);
+    pointer-events: none;
+  }
+  .cover-tag {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 14px;
+  }
+  .cover h1 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 46px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    line-height: 1.05;
+    margin-bottom: 10px;
+  }
+  .cover h1 span { color: var(--teal); }
+  .cover-sub {
+    font-size: 13px;
+    color: rgba(255,255,255,0.65);
+    margin-top: 8px;
+  }
+  .cover-meta {
+    margin-top: 32px;
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+  .cover-meta-item {
+    font-size: 11px;
+    color: rgba(255,255,255,0.5);
+  }
+  .cover-meta-item strong {
+    display: block;
+    font-size: 12px;
+    color: rgba(255,255,255,0.85);
+    margin-bottom: 2px;
+  }
+
+  /* ── LAYOUT ── */
+  .content { max-width: 960px; margin: 0 auto; padding: 0 40px 80px; }
+
+  /* ── SECTION HEADERS ── */
+  .section-header {
+    margin: 56px 0 24px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--navy);
+  }
+  .section-number {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 4px;
+  }
+  .section-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 26px;
+    font-weight: 800;
+    color: var(--navy);
+    letter-spacing: 0.5px;
+  }
+
+  /* ── PILLAR CARDS ── */
+  .pillar-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-top: 8px;
+  }
+  .pillar-card {
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+  .pillar-card-header {
+    padding: 16px 20px 14px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .pillar-swatch {
+    width: 44px;
+    height: 44px;
+    border-radius: 8px;
+    flex-shrink: 0;
+    border: 1px solid rgba(0,0,0,0.12);
+  }
+  .pillar-card-header-text {}
+  .pillar-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 18px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    line-height: 1;
+    margin-bottom: 2px;
+  }
+  .pillar-subtitle {
+    font-size: 11px;
+    color: var(--text-light);
+    font-weight: 500;
+  }
+  .pillar-card-body {
+    padding: 14px 20px 18px;
+    background: #fff;
+  }
+  .spec-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 12px;
+  }
+  .spec-row:last-child { border-bottom: none; }
+  .spec-key { color: var(--text-mid); font-weight: 500; }
+  .spec-val {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text-dark);
+    letter-spacing: 0.5px;
+  }
+  .hex-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--light-bg);
+    border-radius: 20px;
+    padding: 3px 10px 3px 6px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--text-dark);
+  }
+  .hex-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 1px solid rgba(0,0,0,0.15);
+    flex-shrink: 0;
+  }
+
+  /* LEARN card special: dark header */
+  .pillar-card.learn .pillar-card-header { background: var(--navy); }
+  .pillar-card.learn .pillar-label { color: #fff; }
+  .pillar-card.learn .pillar-subtitle { color: rgba(255,255,255,0.6); }
+  .pillar-card.learn .pillar-swatch { background: #ffffff; }
+
+  .pillar-card.nutrition .pillar-card-header { background: var(--nutrition-bg); }
+  .pillar-card.nutrition .pillar-label { color: #2d6e44; }
+  .pillar-card.nutrition .pillar-swatch { background: var(--nutrition); }
+
+  .pillar-card.movement .pillar-card-header { background: var(--movement-bg); }
+  .pillar-card.movement .pillar-label { color: #a84e0a; }
+  .pillar-card.movement .pillar-swatch { background: var(--movement); }
+
+  .pillar-card.wellness .pillar-card-header { background: var(--wellness-bg); }
+  .pillar-card.wellness .pillar-label { color: #a02030; }
+  .pillar-card.wellness .pillar-swatch { background: var(--wellness); }
+
+  /* ── TABLES ── */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 12px;
+    font-size: 12px;
+  }
+  thead tr { background: var(--navy); color: #fff; }
+  thead th {
+    padding: 10px 14px;
+    text-align: left;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+  tbody tr:nth-child(odd) { background: #fff; }
+  tbody tr:nth-child(even) { background: var(--light-bg); }
+  tbody td {
+    padding: 9px 14px;
+    color: var(--text-dark);
+    font-weight: 500;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  tbody td:first-child { font-weight: 700; color: var(--navy); }
+  .pill {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 700;
+    font-family: 'Barlow Condensed', sans-serif;
+    letter-spacing: 0.5px;
+  }
+
+  /* ── PHONE MOCKUP ── */
+  .mockup-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 20px;
+    margin-top: 16px;
+    align-items: start;
+  }
+  .phone-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  .phone-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-mid);
+  }
+  .phone {
+    width: 110px;
+    height: 196px;
+    border-radius: 16px;
+    border: 3px solid var(--text-dark);
+    position: relative;
+    overflow: hidden;
+    background: #1a1a1a;
+  }
+  .phone-notch {
+    position: absolute;
+    top: 0; left: 50%;
+    transform: translateX(-50%);
+    width: 36px; height: 10px;
+    background: var(--text-dark);
+    border-radius: 0 0 8px 8px;
+  }
+  .phone-screen {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 0 7px 12px;
+  }
+  .phone-safe-overlay {
+    position: absolute;
+    inset: 0;
+    border: 2px dashed rgba(255,255,255,0.2);
+    margin: 10px;
+    border-radius: 8px;
+    pointer-events: none;
+  }
+  .caption-zone {
+    width: 100%;
+    border-radius: 6px;
+    padding: 5px 6px;
+    margin-top: 4px;
+    text-align: center;
+  }
+  .caption-zone-label {
+    font-size: 7px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    opacity: 0.7;
+    margin-bottom: 2px;
+  }
+  .caption-line {
+    height: 5px;
+    border-radius: 2px;
+    margin: 2px auto;
+  }
+  .caption-line.full { width: 85%; }
+  .caption-line.partial { width: 55%; }
+  .safe-tag {
+    position: absolute;
+    right: -2px;
+    top: 10px;
+    background: rgba(255,255,255,0.15);
+    color: rgba(255,255,255,0.7);
+    font-size: 5px;
+    padding: 2px 3px;
+    border-radius: 2px 0 0 2px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+  .dimension-arrow {
+    position: absolute;
+    left: 3px;
+    font-size: 5px;
+    color: rgba(255,255,255,0.5);
+    font-family: 'Barlow Condensed', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1px;
+  }
+
+  /* ── MOTION FRAME MOCKUP ── */
+  .motion-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 20px;
+    margin-top: 16px;
+  }
+  .motion-frame {
+    border-radius: 14px;
+    overflow: hidden;
+    position: relative;
+    padding-top: 177.78%;
+    border: 2px solid rgba(0,0,0,0.1);
+  }
+  .motion-frame-inner {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 16px 12px;
+    gap: 8px;
+  }
+  .motion-logo-strip {
+    width: 80%;
+    height: 16px;
+    border-radius: 3px;
+    margin-bottom: 4px;
+    opacity: 0.7;
+  }
+  .motion-rule {
+    width: 60%;
+    height: 2px;
+    border-radius: 1px;
+    opacity: 0.4;
+  }
+  .motion-headline {
+    width: 85%;
+    height: 10px;
+    border-radius: 2px;
+    opacity: 0.9;
+  }
+  .motion-body-1 {
+    width: 90%;
+    height: 7px;
+    border-radius: 2px;
+    opacity: 0.65;
+  }
+  .motion-body-2 {
+    width: 70%;
+    height: 7px;
+    border-radius: 2px;
+    opacity: 0.5;
+  }
+  .motion-tag-frame {
+    position: absolute;
+    bottom: 10px;
+    left: 50%; transform: translateX(-50%);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 8px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    border-radius: 3px;
+    white-space: nowrap;
+  }
+
+  /* ── CALL-OUT BOXES ── */
+  .callout {
+    border-left: 4px solid var(--teal);
+    background: #fff;
+    padding: 14px 18px;
+    border-radius: 0 8px 8px 0;
+    margin: 16px 0;
+    font-size: 12px;
+    color: var(--text-dark);
+  }
+  .callout-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 14px;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: var(--navy);
+    margin-bottom: 6px;
+    letter-spacing: 0.5px;
+  }
+  .callout.warn { border-left-color: var(--movement); }
+  .callout.warn .callout-title { color: #a84e0a; }
+  .callout.rule { border-left-color: var(--wellness); }
+  .callout.rule .callout-title { color: #a02030; }
+
+  /* ── CAPTION POSITION DIAGRAM ── */
+  .caption-diagram-wrap {
+    display: flex;
+    gap: 40px;
+    align-items: flex-start;
+    margin-top: 16px;
+    flex-wrap: wrap;
+  }
+  .big-phone {
+    width: 160px;
+    height: 284px;
+    border-radius: 22px;
+    border: 4px solid var(--text-dark);
+    position: relative;
+    overflow: hidden;
+    background: #111;
+    flex-shrink: 0;
+  }
+  .big-phone-notch {
+    position: absolute;
+    top: 0; left: 50%;
+    transform: translateX(-50%);
+    width: 50px; height: 14px;
+    background: var(--text-dark);
+    border-radius: 0 0 10px 10px;
+    z-index: 10;
+  }
+  .zone-safe {
+    position: absolute;
+    border: 1.5px dashed rgba(255,255,255,0.3);
+    border-radius: 6px;
+    left: 9px; right: 9px; top: 14px; bottom: 14px;
+  }
+  .zone-caption-box {
+    position: absolute;
+    left: 14px; right: 14px;
+    bottom: 36px; height: 64px;
+    background: rgba(0,155,166,0.2);
+    border: 1.5px dashed #009BA6;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .zone-caption-text {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 7.5px;
+    font-weight: 800;
+    color: #009BA6;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .zone-ui-box {
+    position: absolute;
+    left: 14px; right: 14px;
+    bottom: 14px; height: 18px;
+    background: rgba(255,255,255,0.07);
+    border: 1px dashed rgba(255,255,255,0.25);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .zone-ui-text {
+    font-size: 6px;
+    color: rgba(255,255,255,0.4);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .zone-content-box {
+    position: absolute;
+    left: 9px; right: 9px;
+    top: 14px; bottom: 104px;
+    background: rgba(255,255,255,0.03);
+    border: 1px dashed rgba(255,255,255,0.1);
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .zone-content-text {
+    font-size: 7px;
+    color: rgba(255,255,255,0.2);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-align: center;
+    line-height: 1.4;
+  }
+  .dimension-labels {
+    flex: 1;
+    min-width: 200px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding-top: 8px;
+  }
+  .dim-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .dim-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .dim-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--navy);
+    margin-bottom: 2px;
+  }
+  .dim-detail {
+    font-size: 11.5px;
+    color: var(--text-mid);
+    line-height: 1.5;
+  }
+
+  /* ── RENDER STYLE BLOCKS ── */
+  .render-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-top: 12px;
+  }
+  .render-card {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .render-card-head {
+    background: var(--navy);
+    color: #fff;
+    padding: 10px 16px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .render-card-body {
+    padding: 14px 16px;
+    font-size: 12px;
+    color: var(--text-dark);
+  }
+  .render-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0;
+    border-bottom: 1px solid var(--border);
+    gap: 12px;
+  }
+  .render-row:last-child { border-bottom: none; }
+  .render-key { color: var(--text-mid); font-weight: 500; flex-shrink: 0; }
+  .render-val { font-weight: 700; color: var(--text-dark); text-align: right; }
+
+  /* ── CAPTION PREVIEW ── */
+  .caption-preview-area {
+    background: #1a1a1a;
+    border-radius: 10px;
+    padding: 24px 20px;
+    margin-top: 12px;
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .cap-demo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
+  .cap-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+  }
+  .cap-box {
+    padding: 7px 16px;
+    border-radius: 4px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-align: center;
+    line-height: 1.25;
+    max-width: 200px;
+  }
+  .cap-box.word-by-word-demo {
+    border-radius: 4px;
+    display: inline-block;
+  }
+
+  /* ── MG FRAME ANATOMY ── */
+  .mg-anatomy {
+    background: var(--navy);
+    border-radius: 12px;
+    padding: 28px 24px;
+    margin-top: 12px;
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 28px;
+    align-items: start;
+  }
+  .mg-frame-preview {
+    width: 120px;
+    height: 214px;
+    border-radius: 10px;
+    border: 2px solid rgba(255,255,255,0.2);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 14px 10px;
+    background: var(--navy);
+  }
+  .mg-zone {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    align-items: center;
+  }
+  .mg-zone-bar {
+    height: 3px;
+    border-radius: 1.5px;
+    width: 70%;
+    background: rgba(255,255,255,0.2);
+  }
+  .mg-zone-label {
+    font-size: 6.5px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+  }
+  .mg-divider { width: 40%; height: 1px; background: rgba(255,255,255,0.15); margin: 2px 0; }
+  .mg-headline-bar { height: 10px; border-radius: 2px; width: 85%; background: rgba(255,255,255,0.7); }
+  .mg-body-bar { height: 7px; border-radius: 2px; background: rgba(255,255,255,0.4); }
+  .mg-body-bar.w80 { width: 80%; }
+  .mg-body-bar.w65 { width: 65%; }
+  .mg-pillar-tag {
+    height: 14px; width: 60%;
+    border-radius: 10px;
+    margin-top: 6px;
+  }
+  .mg-rules {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-top: 4px;
+  }
+  .mg-rule-row {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+  .mg-rule-num {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--teal);
+    line-height: 1;
+    flex-shrink: 0;
+    width: 20px;
+  }
+  .mg-rule-text {
+    font-size: 11.5px;
+    color: rgba(255,255,255,0.75);
+    line-height: 1.5;
+  }
+  .mg-rule-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px;
+    font-weight: 800;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 2px;
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    background: var(--navy);
+    color: rgba(255,255,255,0.5);
+    text-align: center;
+    padding: 20px;
+    font-size: 11px;
+    margin-top: 64px;
+  }
+  .footer strong { color: rgba(255,255,255,0.8); }
+
+  /* ── UTILITIES ── */
+  .mt8 { margin-top: 8px; }
+  .mt16 { margin-top: 16px; }
+  .teal { color: var(--teal); }
+  .navy { color: var(--navy); }
+  .small { font-size: 11px; color: var(--text-light); }
+
+  @media print {
+    body { background: #fff; }
+    .cover { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .pillar-card-header { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══════════════ COVER ══════════════ -->
+<div class="cover">
+  <div class="cover-tag">Internal Production Document</div>
+  <h1>MYOSYNEX<span>™</span><br>VIDEO EDITING TEMPLATE</h1>
+  <div class="cover-sub">Standard for all edited videos — four content pillars</div>
+  <div class="cover-meta">
+    <div class="cover-meta-item"><strong>Canvas</strong>1080 × 1920 px · 9:16</div>
+    <div class="cover-meta-item"><strong>Frame Rate</strong>24 fps</div>
+    <div class="cover-meta-item"><strong>Primary Font</strong>Barlow Condensed</div>
+    <div class="cover-meta-item"><strong>Secondary Font</strong>Montserrat</div>
+    <div class="cover-meta-item"><strong>Version</strong>1.0 — May 2026</div>
+  </div>
+</div>
+
+<div class="content">
+
+<!-- ══════════════ SECTION 1: PILLAR COLOR SYSTEM ══════════════ -->
+<div class="section-header">
+  <div class="section-number">Section 01</div>
+  <div class="section-title">Pillar Color System</div>
+</div>
+
+<p style="font-size:12.5px; color:var(--text-mid); margin-bottom:20px;">Every asset — captions, motion graphics frames, lower-thirds, and title cards — is governed by the pillar it belongs to. The accent color below drives all design decisions within that pillar.</p>
+
+<div class="pillar-grid">
+
+  <!-- PRODUCT EDUCATION -->
+  <div class="pillar-card learn">
+    <div class="pillar-card-header">
+      <div class="pillar-swatch" style="background:#ffffff; border:1px solid rgba(255,255,255,0.4);"></div>
+      <div class="pillar-card-header-text">
+        <div class="pillar-label">Product Education</div>
+        <div class="pillar-subtitle">Dr. Robert Silverman · Supplement Science</div>
+      </div>
+    </div>
+    <div class="pillar-card-body">
+      <div class="spec-row">
+        <span class="spec-key">Accent Color</span>
+        <span class="spec-val"><span class="hex-pill"><span class="hex-dot" style="background:#ffffff; border:1px solid #ccc;"></span>#ffffff</span></span>
+      </div>
+      <div class="spec-row">
+        <span class="spec-key">Motion Graphic Background</span>
+        <span class="spec-val"><span class="hex-pill"><span class="hex-dot" style="background:#044872;"></span>Navy #044872</span></span>
+      </div>
+      <div class="spec-row">
+        <span class="spec-key">Font Color on Frame</span>
+        <span class="spec-val">TBD — Full Brand Guidelines</span>
+      </div>
+      <div class="spec-row">
+        <span class="spec-key">Content Tone</span>
+        <span class="spec-val">Scientific · Credible · Clinical</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- NUTRITION -->
+  <div class="pillar-card nutrition">
+    <div class="pillar-card-header">
+      <div class="pillar-swatch"></div>
+      <div class="pillar-card-header-text">
+        <div class="pillar-label">Nutrition</div>
+        <div class="pillar-subtitle">Harley Cup · Nutritionist</div>
+      </div>
+    </div>
+    <div class="pillar-card-body">
+      <div class="spec-row">
+        <span class="spec-key">Accent Color</span>
+        <span class="spec-val"><span class="hex-pill"><span class="hex-dot" style="background:#55a56e;"></span>#55a56e</span></span>
+      </div>
+      <div class="spec-row">
+        <span class="spec-key">Motion Graphic Background</span>
+        <span class="spec-val"><span class="hex-pill"><span class="hex-dot" style="background:#55a56e;"></span>Green #55a56e</span></span>
+      </div>
+      <div class="spec-row">
+        <span class="spec-key">Font Color on Frame</span>
+        <span class="spec-val">TBD — Full Brand Guidelines</span>
+      </div>
+      <div class="spec-row">
+        <span class="spec-key">Content Tone</span>
+        <span class="spec-val">Nourishing · Practical · Energizing</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- MOVEMENT -->
+  <div class="pillar-card movement">
+    <div class="pillar-card-header">
+      <div class="pillar-swatch"></div>
+      <div class="pillar-card-header-text">
+        <div class="pillar-label">Movement</div>
+        <div class="pillar-subtitle">Nick Arderson · Physical Therapist</div>
+      </div>
+    </div>
+    <div class="pillar-card-body">
+      <div class="spec-row">
+        <span class="spec-key">Accent Color</span>
+        <span class="spec-val"><span class="hex-pill"><span class="hex-dot" style="background:#e6781e;"></span>#e6781e</span></span>
+      </div>
+      <div class="spec-row">
+        <span class="spec-key">Motion Graphic Background</span>
+        <span class="spec-val"><span class="hex-pill"><span class="hex-dot" style="background:#e6781e;"></span>Orange #e6781e</span></span>
+      </div>
+      <div class="spec-row">
+        <span class="spec-key">Font Color on Frame</span>
+        <span class="spec-val">TBD — Full Brand Guidelines</span>
+      </div>
+      <div class="spec-row">
+        <span class="spec-key">Content Tone</span>
+        <span class="spec-val">Energetic · Functional · Empowering</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- WELLNESS -->
+  <div class="pillar-card wellness">
+    <div class="pillar-card-header">
+      <div class="pillar-swatch"></div>
+      <div class="pillar-card-header-text">
+        <div class="pillar-label">Wellness</div>
+        <div class="pillar-subtitle">Ingred Valencia · Life Coach</div>
+      </div>
+    </div>
+    <div class="pillar-card-body">
+      <div class="spec-row">
+        <span class="spec-key">Accent Color</span>
+        <span class="spec-val"><span class="hex-pill"><span class="hex-dot" style="background:#e14b5a;"></span>#e14b5a</span></span>
+      </div>
+      <div class="spec-row">
+        <span class="spec-key">Motion Graphic Background</span>
+        <span class="spec-val"><span class="hex-pill"><span class="hex-dot" style="background:#e14b5a;"></span>Red #e14b5a</span></span>
+      </div>
+      <div class="spec-row">
+        <span class="spec-key">Font Color on Frame</span>
+        <span class="spec-val">TBD — Full Brand Guidelines</span>
+      </div>
+      <div class="spec-row">
+        <span class="spec-key">Content Tone</span>
+        <span class="spec-val">Calm · Restorative · Mindful</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="callout mt16">
+  <div class="callout-title">Note on Font Colors</div>
+  Font colors for text appearing on each pillar's background frame are pending the full brand guidelines delivery. When received, this template will be updated. In the interim, use white (#ffffff) as a default for all body text on colored frames — it is legible across all four pillar backgrounds.
+</div>
+
+
+<!-- ══════════════ SECTION 2: CANVAS & SAFE ZONES ══════════════ -->
+<div class="section-header">
+  <div class="section-number">Section 02</div>
+  <div class="section-title">Canvas Setup & Safe Zones</div>
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Setting</th><th>Value</th><th>Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>Canvas Size (Primary)</td><td>1080 × 1920 px</td><td>9:16 vertical — app and short-form social</td></tr>
+    <tr><td>Canvas Size (Primary)</td><td>1920 × 1080 px</td><td>16:9 horizontal — both are required deliverables</td></tr>
+    <tr><td>Frame Rate</td><td>24 fps</td><td>All sequences and exports</td></tr>
+    <tr><td>Color Space</td><td>sRGB</td><td>Optimized for screen/app delivery</td></tr>
+    <tr><td>Safe Zone Margin</td><td>96 px all sides</td><td>No text or key elements outside this boundary</td></tr>
+    <tr><td>9:16 Caption Zone Top Edge</td><td>1580 px from top</td><td>Approx. 82% down the frame — see diagram below</td></tr>
+    <tr><td>9:16 Caption Zone Bottom Edge</td><td>1730 px from top</td><td>Leaves ~190 px for platform UI (likes, comments)</td></tr>
+    <tr><td>9:16 Caption Zone Width</td><td>888 px (centered)</td><td>96 px margin on each side</td></tr>
+    <tr><td>9:16 UI Dead Zone (bottom)</td><td>Bottom 190 px</td><td>Reserved for platform interface — no editorial content</td></tr>
+    <tr><td>16:9 Caption Zone Top Edge</td><td>810 px from top</td><td>Approx. 79% down the frame — see diagram below</td></tr>
+    <tr><td>16:9 Caption Zone Bottom Edge</td><td>960 px from top</td><td>Leaves ~120 px for subtitles/safe margin at bottom</td></tr>
+    <tr><td>16:9 Caption Zone Width</td><td>1728 px (centered)</td><td>96 px margin on each side</td></tr>
+    <tr><td>16:9 UI Dead Zone (bottom)</td><td>Bottom 120 px</td><td>Reserved for lower-third safe margin — no editorial content</td></tr>
+  </tbody>
+</table>
+
+
+<!-- ══════════════ SECTION 3: CAPTION POSITIONING ══════════════ -->
+<div class="section-header">
+  <div class="section-number">Section 03</div>
+  <div class="section-title">Caption Positioning</div>
+</div>
+
+<div class="caption-diagram-wrap">
+
+  <!-- 9:16 Phone Mockup -->
+  <div>
+    <div style="font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:2px;color:var(--teal);margin-bottom:8px;text-align:center;">9:16 Vertical</div>
+    <div class="big-phone">
+      <div class="big-phone-notch"></div>
+      <div style="position:absolute;left:9px;right:9px;top:14px;bottom:118px;background:rgba(255,255,255,0.04);border:1px dashed rgba(255,255,255,0.12);border-radius:5px;display:flex;align-items:center;justify-content:center;">
+        <div style="font-size:7px;color:rgba(255,255,255,0.2);font-family:'Barlow Condensed',sans-serif;font-weight:700;letter-spacing:1px;text-align:center;line-height:1.5;">A-ROLL VIDEO<br>CONTENT</div>
+      </div>
+      <div style="position:absolute;left:14px;right:14px;bottom:44px;height:68px;background:rgba(0,155,166,0.18);border:1.5px dashed #009BA6;border-radius:5px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;">
+        <div style="font-family:'Barlow Condensed',sans-serif;font-size:8px;font-weight:800;color:#009BA6;letter-spacing:1px;text-transform:uppercase;">Caption Zone</div>
+        <div style="font-size:6px;color:rgba(0,155,166,0.7);font-family:'Barlow Condensed',sans-serif;">Max 2 lines · 35 chars/line</div>
+      </div>
+      <div style="position:absolute;left:14px;right:14px;bottom:14px;height:26px;background:rgba(255,255,255,0.05);border:1px dashed rgba(255,255,255,0.2);border-radius:4px;display:flex;align-items:center;justify-content:center;">
+        <div style="font-size:5.5px;color:rgba(255,255,255,0.3);font-family:'Barlow Condensed',sans-serif;font-weight:700;letter-spacing:1px;text-transform:uppercase;">Platform UI — Keep Clear</div>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:8px;font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;color:var(--text-mid);letter-spacing:1px;text-transform:uppercase;">1080 × 1920 px</div>
+  </div>
+
+  <!-- 16:9 Landscape Mockup -->
+  <div>
+    <div style="font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:2px;color:var(--teal);margin-bottom:8px;text-align:center;">16:9 Horizontal</div>
+    <!-- Landscape screen -->
+    <div style="width:284px;height:160px;border-radius:10px;border:4px solid var(--text-dark);background:#111;position:relative;overflow:hidden;">
+      <!-- content zone -->
+      <div style="position:absolute;left:9px;right:9px;top:9px;bottom:58px;background:rgba(255,255,255,0.04);border:1px dashed rgba(255,255,255,0.12);border-radius:5px;display:flex;align-items:center;justify-content:center;">
+        <div style="font-size:7px;color:rgba(255,255,255,0.2);font-family:'Barlow Condensed',sans-serif;font-weight:700;letter-spacing:1px;text-align:center;line-height:1.5;">A-ROLL VIDEO CONTENT</div>
+      </div>
+      <!-- caption zone -->
+      <div style="position:absolute;left:14px;right:14px;bottom:24px;height:30px;background:rgba(0,155,166,0.18);border:1.5px dashed #009BA6;border-radius:5px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;">
+        <div style="font-family:'Barlow Condensed',sans-serif;font-size:7px;font-weight:800;color:#009BA6;letter-spacing:1px;text-transform:uppercase;">Caption Zone</div>
+        <div style="font-size:5.5px;color:rgba(0,155,166,0.7);font-family:'Barlow Condensed',sans-serif;">Max 2 lines · 55 chars/line</div>
+      </div>
+      <!-- ui dead zone -->
+      <div style="position:absolute;left:14px;right:14px;bottom:8px;height:12px;background:rgba(255,255,255,0.04);border:1px dashed rgba(255,255,255,0.15);border-radius:3px;display:flex;align-items:center;justify-content:center;">
+        <div style="font-size:4.5px;color:rgba(255,255,255,0.25);font-family:'Barlow Condensed',sans-serif;font-weight:700;letter-spacing:1px;text-transform:uppercase;">Safe Margin — Keep Clear</div>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:8px;font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;color:var(--text-mid);letter-spacing:1px;text-transform:uppercase;">1920 × 1080 px</div>
+  </div>
+
+  <!-- Labels -->
+  <div class="dimension-labels">
+    <div style="font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--navy);margin-bottom:4px;">9:16 Zones</div>
+    <div class="dim-item">
+      <div class="dim-dot" style="background:#009BA6;"></div>
+      <div>
+        <div class="dim-label" style="color:#009BA6;">Caption Zone</div>
+        <div class="dim-detail">1580 – 1730 px from top. Lower third, clear of platform buttons. Max 2 lines.</div>
+      </div>
+    </div>
+    <div class="dim-item">
+      <div class="dim-dot" style="background:rgba(255,255,255,0.2);border:2px dashed rgba(255,255,255,0.4);"></div>
+      <div>
+        <div class="dim-label" style="color:var(--text-light);">UI Dead Zone</div>
+        <div class="dim-detail">Bottom 190 px — likes, comments, share icons on all platforms.</div>
+      </div>
+    </div>
+    <div style="font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--navy);margin-top:12px;margin-bottom:4px;">16:9 Zones</div>
+    <div class="dim-item">
+      <div class="dim-dot" style="background:#009BA6;"></div>
+      <div>
+        <div class="dim-label" style="color:#009BA6;">Caption Zone</div>
+        <div class="dim-detail">810 – 960 px from top. Lower fifth of the frame. Max 2 lines, ~55 chars/line at this wider width.</div>
+      </div>
+    </div>
+    <div class="dim-item">
+      <div class="dim-dot" style="background:rgba(255,255,255,0.2);border:2px dashed rgba(255,255,255,0.4);"></div>
+      <div>
+        <div class="dim-label" style="color:var(--text-light);">Safe Margin</div>
+        <div class="dim-detail">Bottom 120 px — lower-third safe margin. No editorial content below this line.</div>
+      </div>
+    </div>
+    <div class="dim-item">
+      <div class="dim-dot" style="background:var(--navy);"></div>
+      <div>
+        <div class="dim-label navy">Both Formats</div>
+        <div class="dim-detail">Caption font size adjusts per format: <strong>72–80 px</strong> for 9:16, <strong>52–60 px</strong> for 16:9. Same alignment rules apply — centered, within safe zone.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════ SECTION 4: CAPTION RENDERING ══════════════ -->
+<div class="section-header">
+  <div class="section-number">Section 04</div>
+  <div class="section-title">Caption Rendering</div>
+</div>
+
+<div class="render-grid">
+  <div class="render-card">
+    <div class="render-card-head">Typography</div>
+    <div class="render-card-body">
+      <div class="render-row"><span class="render-key">Font Family</span><span class="render-val">Barlow Condensed</span></div>
+      <div class="render-row"><span class="render-key">Weight</span><span class="render-val">Bold (700)</span></div>
+      <div class="render-row"><span class="render-key">Size</span><span class="render-val">72 – 80 px</span></div>
+      <div class="render-row"><span class="render-key">Case</span><span class="render-val">Sentence case</span></div>
+      <div class="render-row"><span class="render-key">Line Height</span><span class="render-val">1.15</span></div>
+      <div class="render-row"><span class="render-key">Max Line Length</span><span class="render-val">~35 characters</span></div>
+      <div class="render-row"><span class="render-key">Max Lines per Card</span><span class="render-val">2 lines</span></div>
+    </div>
+  </div>
+  <div class="render-card">
+    <div class="render-card-head">Appearance</div>
+    <div class="render-card-body">
+      <div class="render-row"><span class="render-key">Text Color</span><span class="render-val">#ffffff (white)</span></div>
+      <div class="render-row"><span class="render-key">Active Word Highlight</span><span class="render-val">Pillar accent color</span></div>
+      <div class="render-row"><span class="render-key">Background</span><span class="render-val">None / transparent</span></div>
+      <div class="render-row"><span class="render-key">Shadow</span><span class="render-val">0 2px 12px rgba(0,0,0,0.6)</span></div>
+      <div class="render-row"><span class="render-key">Stroke / Outline</span><span class="render-val">None</span></div>
+      <div class="render-row"><span class="render-key">Alignment</span><span class="render-val">Center</span></div>
+    </div>
+  </div>
+  <div class="render-card">
+    <div class="render-card-head">Animation Style</div>
+    <div class="render-card-body">
+      <div class="render-row"><span class="render-key">Style</span><span class="render-val">Word-by-word reveal</span></div>
+      <div class="render-row"><span class="render-key">Reveal Type</span><span class="render-val">Pop-on (no wipe/fly)</span></div>
+      <div class="render-row"><span class="render-key">Sync</span><span class="render-val">Aligned to speech audio</span></div>
+      <div class="render-row"><span class="render-key">Active Word Effect</span><span class="render-val">Scale to 110% + color shift</span></div>
+      <div class="render-row"><span class="render-key">Exit</span><span class="render-val">Instant replace, no fade</span></div>
+      <div class="render-row"><span class="render-key">Tool Reference</span><span class="render-val">CapCut Auto-Caption / Premiere</span></div>
+    </div>
+  </div>
+  <div class="render-card">
+    <div class="render-card-head">Per-Pillar Highlight Color</div>
+    <div class="render-card-body">
+      <div class="render-row">
+        <span class="render-key">Product Education</span>
+        <span><span class="pill" style="background:#044872;color:#fff;">White on Navy</span></span>
+      </div>
+      <div class="render-row">
+        <span class="render-key">Nutrition</span>
+        <span><span class="pill" style="background:#55a56e;color:#fff;">#55a56e</span></span>
+      </div>
+      <div class="render-row">
+        <span class="render-key">Movement</span>
+        <span><span class="pill" style="background:#e6781e;color:#fff;">#e6781e</span></span>
+      </div>
+      <div class="render-row">
+        <span class="render-key">Wellness</span>
+        <span><span class="pill" style="background:#e14b5a;color:#fff;">#e14b5a</span></span>
+      </div>
+      <div class="render-row"><span class="render-key">Inactive Words</span><span class="render-val">White, 60% opacity</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- Caption visual preview -->
+<div style="margin-top:20px;">
+  <div style="font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;text-transform:uppercase;color:var(--navy);letter-spacing:1px;margin-bottom:10px;">Caption Preview — Word-by-Word Highlight</div>
+  <div class="caption-preview-area">
+    <div class="cap-demo">
+      <div class="cap-label">Product Education</div>
+      <div style="text-align:center;max-width:220px;">
+        <span class="cap-box" style="color:rgba(255,255,255,0.55);font-size:19px;">Your gut is </span><span class="cap-box" style="color:#fff;font-size:22px;background:rgba(255,255,255,0.12);padding:2px 7px;border-radius:4px;">the engine</span>
+      </div>
+    </div>
+    <div class="cap-demo">
+      <div class="cap-label">Nutrition</div>
+      <div style="text-align:center;max-width:220px;">
+        <span class="cap-box" style="color:rgba(255,255,255,0.55);font-size:19px;">Protein </span><span class="cap-box" style="color:#55a56e;font-size:22px;background:rgba(85,165,110,0.18);padding:2px 7px;border-radius:4px;">rebuilds</span><span class="cap-box" style="color:rgba(255,255,255,0.55);font-size:19px;"> tissue</span>
+      </div>
+    </div>
+    <div class="cap-demo">
+      <div class="cap-label">Movement</div>
+      <div style="text-align:center;max-width:220px;">
+        <span class="cap-box" style="color:rgba(255,255,255,0.55);font-size:19px;">Start with </span><span class="cap-box" style="color:#e6781e;font-size:22px;background:rgba(230,120,30,0.18);padding:2px 7px;border-radius:4px;">five reps</span>
+      </div>
+    </div>
+    <div class="cap-demo">
+      <div class="cap-label">Wellness</div>
+      <div style="text-align:center;max-width:220px;">
+        <span class="cap-box" style="color:rgba(255,255,255,0.55);font-size:19px;">Sleep is </span><span class="cap-box" style="color:#e14b5a;font-size:22px;background:rgba(225,75,90,0.18);padding:2px 7px;border-radius:4px;">non-negotiable</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════ SECTION 5: MOTION GRAPHICS ══════════════ -->
+<div class="section-header">
+  <div class="section-number">Section 05</div>
+  <div class="section-title">Motion Graphics Frames</div>
+</div>
+
+<div class="callout rule">
+  <div class="callout-title">Hard Rule — Full Frame</div>
+  Every motion graphic must render on its own dedicated full-screen frame. Motion graphics never appear on top of A-roll video footage. Each frame is a complete visual unit with its own branded background in the pillar accent color.
+</div>
+
+<div class="mg-anatomy">
+  <!-- Frame visual -->
+  <div>
+    <div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:10px;">Frame anatomy</div>
+    <div class="mg-frame-preview" style="background: linear-gradient(160deg, #044872 60%, #023555);">
+      <div class="mg-zone" style="margin-bottom:4px;">
+        <div class="mg-zone-label">Logo zone</div>
+        <div style="width:80%;height:12px;border-radius:2px;background:rgba(255,255,255,0.6);"></div>
+        <div style="width:80%;height:5px;border-radius:1px;background:rgba(255,255,255,0.3);margin-top:2px;"></div>
+      </div>
+      <div class="mg-divider"></div>
+      <div class="mg-zone">
+        <div class="mg-zone-label">Headline</div>
+        <div class="mg-headline-bar"></div>
+      </div>
+      <div class="mg-zone">
+        <div class="mg-zone-label">Body copy</div>
+        <div class="mg-body-bar w80"></div>
+        <div class="mg-body-bar w65"></div>
+      </div>
+      <div class="mg-pillar-tag" style="background:rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;">
+        <div style="font-size:5.5px;font-family:'Barlow Condensed',sans-serif;font-weight:800;color:rgba(255,255,255,0.6);letter-spacing:1.5px;text-transform:uppercase;">PILLAR TAG</div>
+      </div>
+    </div>
+  </div>
+  <!-- Rules -->
+  <div class="mg-rules">
+    <div class="mg-rule-row">
+      <div class="mg-rule-num">1</div>
+      <div>
+        <div class="mg-rule-title">Full-screen background</div>
+        <div class="mg-rule-text">The entire frame fills with the pillar's accent color. No video playing behind it. No transparency. Solid fill from edge to edge.</div>
+      </div>
+    </div>
+    <div class="mg-rule-row">
+      <div class="mg-rule-num">2</div>
+      <div>
+        <div class="mg-rule-title">Logo always present</div>
+        <div class="mg-rule-text">MyoSynex logo lockup appears in the upper zone of every motion graphic frame. Use the white reverse version on colored backgrounds. Logo must clear its required safe space (see packaging guide).</div>
+      </div>
+    </div>
+    <div class="mg-rule-row">
+      <div class="mg-rule-num">3</div>
+      <div>
+        <div class="mg-rule-title">Barlow Condensed — all type</div>
+        <div class="mg-rule-text">All text on motion graphic frames uses Barlow Condensed. Headline: Bold 800. Body copy: SemiBold 600. Pillar tag: Bold 700, all caps, tracked wide.</div>
+      </div>
+    </div>
+    <div class="mg-rule-row">
+      <div class="mg-rule-num">4</div>
+      <div>
+        <div class="mg-rule-title">Slide-in animation</div>
+        <div class="mg-rule-text">Frame slides in from the right. Duration: 0.3s. Ease: cubic ease-out. Holds for content duration. Exits with a cut or quick slide-left.</div>
+      </div>
+    </div>
+    <div class="mg-rule-row">
+      <div class="mg-rule-num">5</div>
+      <div>
+        <div class="mg-rule-title">No mixed pillars</div>
+        <div class="mg-rule-text">A motion graphic frame uses exactly one pillar color. Never mix colors from different pillars within a single video. All MG frames in one video share the same pillar background.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MG per-pillar previews -->
+<div style="margin-top:24px;">
+  <div style="font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;text-transform:uppercase;color:var(--navy);letter-spacing:1px;margin-bottom:12px;">Motion Graphic Frame — Per Pillar</div>
+  <div class="motion-grid">
+
+    <!-- Product Education -->
+    <div>
+      <div class="motion-frame">
+        <div class="motion-frame-inner" style="background:#044872;">
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:800;color:rgba(255,255,255,0.5);letter-spacing:2px;text-transform:uppercase;margin-bottom:2px;">MYOSYNEX™</div>
+          <div style="width:60%;height:1px;background:rgba(255,255,255,0.2);margin:2px 0 8px;"></div>
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:800;color:#fff;text-align:center;line-height:1.2;letter-spacing:0.5px;">GUT–MUSCLE<br>AXIS</div>
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:8px;color:rgba(255,255,255,0.55);text-align:center;margin-top:4px;line-height:1.4;">How your gut supports<br>muscle strength</div>
+          <div style="margin-top:10px;background:rgba(255,255,255,0.12);padding:2px 10px;border-radius:10px;">
+            <div style="font-family:'Barlow Condensed',sans-serif;font-size:7px;font-weight:800;color:rgba(255,255,255,0.6);letter-spacing:2px;text-transform:uppercase;">PRODUCT EDUCATION</div>
+          </div>
+        </div>
+      </div>
+      <div style="text-align:center;margin-top:6px;font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;color:var(--navy);letter-spacing:1px;text-transform:uppercase;">Product Education</div>
+      <div style="text-align:center;font-size:10px;color:var(--text-light);">#044872 bg · #ffffff text</div>
+    </div>
+
+    <!-- Nutrition -->
+    <div>
+      <div class="motion-frame">
+        <div class="motion-frame-inner" style="background:#55a56e;">
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:800;color:rgba(255,255,255,0.6);letter-spacing:2px;text-transform:uppercase;margin-bottom:2px;">MYOSYNEX™</div>
+          <div style="width:60%;height:1px;background:rgba(255,255,255,0.3);margin:2px 0 8px;"></div>
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:800;color:#fff;text-align:center;line-height:1.2;letter-spacing:0.5px;">PROTEIN<br>TARGETS</div>
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:8px;color:rgba(255,255,255,0.7);text-align:center;margin-top:4px;line-height:1.4;">Daily intake for adults 50+</div>
+          <div style="margin-top:10px;background:rgba(255,255,255,0.2);padding:2px 10px;border-radius:10px;">
+            <div style="font-family:'Barlow Condensed',sans-serif;font-size:7px;font-weight:800;color:rgba(255,255,255,0.8);letter-spacing:2px;text-transform:uppercase;">NUTRITION</div>
+          </div>
+        </div>
+      </div>
+      <div style="text-align:center;margin-top:6px;font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;color:#2d6e44;letter-spacing:1px;text-transform:uppercase;">Nutrition</div>
+      <div style="text-align:center;font-size:10px;color:var(--text-light);">#55a56e bg · TBD text</div>
+    </div>
+
+    <!-- Movement -->
+    <div>
+      <div class="motion-frame">
+        <div class="motion-frame-inner" style="background:#e6781e;">
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:800;color:rgba(255,255,255,0.6);letter-spacing:2px;text-transform:uppercase;margin-bottom:2px;">MYOSYNEX™</div>
+          <div style="width:60%;height:1px;background:rgba(255,255,255,0.3);margin:2px 0 8px;"></div>
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:800;color:#fff;text-align:center;line-height:1.2;letter-spacing:0.5px;">3 BALANCE<br>EXERCISES</div>
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:8px;color:rgba(255,255,255,0.75);text-align:center;margin-top:4px;line-height:1.4;">For stability and fall prevention</div>
+          <div style="margin-top:10px;background:rgba(255,255,255,0.2);padding:2px 10px;border-radius:10px;">
+            <div style="font-family:'Barlow Condensed',sans-serif;font-size:7px;font-weight:800;color:rgba(255,255,255,0.8);letter-spacing:2px;text-transform:uppercase;">MOVEMENT</div>
+          </div>
+        </div>
+      </div>
+      <div style="text-align:center;margin-top:6px;font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;color:#a84e0a;letter-spacing:1px;text-transform:uppercase;">Movement</div>
+      <div style="text-align:center;font-size:10px;color:var(--text-light);">#e6781e bg · TBD text</div>
+    </div>
+
+    <!-- Wellness -->
+    <div>
+      <div class="motion-frame">
+        <div class="motion-frame-inner" style="background:#e14b5a;">
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:800;color:rgba(255,255,255,0.6);letter-spacing:2px;text-transform:uppercase;margin-bottom:2px;">MYOSYNEX™</div>
+          <div style="width:60%;height:1px;background:rgba(255,255,255,0.3);margin:2px 0 8px;"></div>
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:800;color:#fff;text-align:center;line-height:1.2;letter-spacing:0.5px;">SLEEP &<br>RECOVERY</div>
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:8px;color:rgba(255,255,255,0.75);text-align:center;margin-top:4px;line-height:1.4;">Why rest is part of the program</div>
+          <div style="margin-top:10px;background:rgba(255,255,255,0.2);padding:2px 10px;border-radius:10px;">
+            <div style="font-family:'Barlow Condensed',sans-serif;font-size:7px;font-weight:800;color:rgba(255,255,255,0.8);letter-spacing:2px;text-transform:uppercase;">WELLNESS</div>
+          </div>
+        </div>
+      </div>
+      <div style="text-align:center;margin-top:6px;font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;color:#a02030;letter-spacing:1px;text-transform:uppercase;">Wellness</div>
+      <div style="text-align:center;font-size:10px;color:var(--text-light);">#e14b5a bg · TBD text</div>
+    </div>
+
+  </div>
+</div>
+
+<table class="mt16">
+  <thead>
+    <tr><th>Frame Element</th><th>Spec</th><th>Notes</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Background Fill</td><td>Pillar accent color — full bleed</td><td>No gradients. Solid flat fill only.</td></tr>
+    <tr><td>Logo Placement</td><td>Horizontally centered, 160 px from top</td><td>White reverse version. Minimum 1.5" equivalent size.</td></tr>
+    <tr><td>Headline Font</td><td>Barlow Condensed Bold 800</td><td>All caps. Size: approx. 96–112 px.</td></tr>
+    <tr><td>Body Text Font</td><td>Barlow Condensed SemiBold 600</td><td>Sentence case. Size: approx. 52–64 px.</td></tr>
+    <tr><td>Pillar Tag</td><td>Barlow Condensed Bold 700, tracked +150</td><td>Bottom of frame. All caps. Reversed in pillar color or white.</td></tr>
+    <tr><td>Rule Line</td><td>1 px horizontal, 60% frame width</td><td>Appears between logo and headline. White at 30% opacity.</td></tr>
+    <tr><td>Animation In</td><td>Slide from right, 0.3s, ease-out</td><td>Frame enters as a complete unit — no elements animating separately.</td></tr>
+    <tr><td>Animation Out</td><td>Cut or slide-left, 0.15s</td><td>Exit should feel decisive. No fade.</td></tr>
+    <tr><td>Duration on Screen</td><td>2.5 – 4 seconds</td><td>Depends on amount of text. Never flash shorter than 2 seconds.</td></tr>
+  </tbody>
+</table>
+
+
+<!-- ══════════════ SECTION 6: VIDEO STRUCTURE ══════════════ -->
+<div class="section-header">
+  <div class="section-number">Section 06</div>
+  <div class="section-title">Standard Video Structure</div>
+</div>
+
+<table>
+  <thead>
+    <tr><th>#</th><th>Segment</th><th>Duration</th><th>Content</th><th>Notes</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>1</td><td>Intro</td><td>3.5 sec</td><td>Branded intro animation</td><td>Navy bg · dot animation · logo · pillar name · chime</td></tr>
+    <tr><td>2</td><td>Hook</td><td>0–5 sec</td><td>A-roll — speaker's opening statement</td><td>Captions active. No B-roll over the hook — let the face hold attention.</td></tr>
+    <tr><td>3</td><td>Body</td><td>Variable</td><td>A-roll with B-roll cutaways</td><td>Captions always on. Motion graphic frames placed at key points (see rule below).</td></tr>
+    <tr><td>4</td><td>Motion Graphic Frames</td><td>2.5–4 sec each</td><td>Key stats, terms, steps</td><td>Use at key moments — wherever the content benefits from being read, not just heard. Every MG is a dedicated full-screen frame.</td></tr>
+    <tr><td>5</td><td>Outro</td><td>3 sec</td><td>Branded outro animation</td><td>Same pillar color as intro · full logo · chime (softer) · fade to black</td></tr>
+  </tbody>
+</table>
+
+<div class="callout warn mt16">
+  <div class="callout-title">When to Use a Motion Graphic Frame</div>
+  Use a motion graphic frame whenever the speaker references a stat, a list, a term, or a step-by-step instruction that benefits from being read, not just heard. Place them at natural pauses — never cut to an MG in the middle of a sentence.
+</div>
+
+
+<!-- ══════════════ SECTION 7: BRAND VOICE ══════════════ -->
+<div class="section-header">
+  <div class="section-number">Section 07</div>
+  <div class="section-title">Brand Voice — Editing Considerations</div>
+</div>
+
+<p style="font-size:12.5px;color:var(--text-mid);margin-bottom:16px;">The Proactive Ager audience is 50+, intelligent, and does not respond to hype. Every editing decision should reinforce the brand promise: <em style="color:var(--navy);font-style:normal;font-weight:600;">"Strong aging starts within."</em></p>
+
+<table>
+  <thead>
+    <tr><th>Do</th><th>Do Not</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Keep pacing measured — this is not a hype reel</td><td>Use rapid-fire jump cuts or flash transitions</td></tr>
+    <tr><td>Let the speaker finish thoughts before cutting</td><td>Cut mid-word or mid-breath for effect</td></tr>
+    <tr><td>Use B-roll that shows real functional movement (walking, lifting, cooking)</td><td>Use youth-focused or gym-bodybuilder B-roll</td></tr>
+    <tr><td>Keep music subtle — it supports the voice, not competes with it</td><td>Use loud or trendy audio that overshadows the content</td></tr>
+    <tr><td>Color-grade to a clean, slightly warm, clinical-modern feel</td><td>Add heavy filters, oversaturated looks, or moody dark grades</td></tr>
+    <tr><td>Use motion graphics to reinforce key points — credibly</td><td>Overload the video with text overlays, flying graphics, or decorative animations</td></tr>
+    <tr><td>Maintain pillar color consistency throughout the full video</td><td>Mix pillar accent colors within a single video</td></tr>
+    <tr><td>Ensure captions are perfectly synced to speech</td><td>Allow caption drift — unsynchronized captions break trust immediately</td></tr>
+  </tbody>
+</table>
+
+
+<!-- ══════════════ SECTION 8: NAMING & FILE DELIVERY ══════════════ -->
+<div class="section-header">
+  <div class="section-number">Section 08</div>
+  <div class="section-title">File Naming & Delivery</div>
+</div>
+
+<table>
+  <thead>
+    <tr><th>Format</th><th>Example</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>MYOSYNEX_[PILLAR]_[BATCH#]_[VIDEO#]_v[VERSION].mp4</td><td>MYOSYNEX_NUTRITION_B01_V03_v1.mp4</td></tr>
+    <tr><td>MYOSYNEX_[PILLAR]_[BATCH#]_[VIDEO#]_v[VERSION].mp4</td><td>MYOSYNEX_MOVEMENT_B02_V11_v2.mp4</td></tr>
+  </tbody>
+</table>
+
+<table class="mt8">
+  <thead>
+    <tr><th>Pillar Code</th><th>Use In File Name</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Product Education</td><td>PRODUCT</td></tr>
+    <tr><td>Nutrition</td><td>NUTRITION</td></tr>
+    <tr><td>Movement</td><td>MOVEMENT</td></tr>
+    <tr><td>Wellness</td><td>WELLNESS</td></tr>
+  </tbody>
+</table>
+
+<div class="callout mt16">
+  <div class="callout-title">Export Checklist Before Delivery</div>
+  <span>☐ Canvas 9:16 — 1080 × 1920 px &nbsp;·&nbsp; ☐ Canvas 16:9 — 1920 × 1080 px &nbsp;·&nbsp; ☐ Frame rate: 24 fps &nbsp;·&nbsp; ☐ Color space: sRGB &nbsp;·&nbsp; ☐ No content in 9:16 UI dead zone (bottom 190 px) &nbsp;·&nbsp; ☐ No content in 16:9 safe margin (bottom 120 px) &nbsp;·&nbsp; ☐ Captions synced &nbsp;·&nbsp; ☐ Intro/outro present &nbsp;·&nbsp; ☐ Correct pillar color used throughout &nbsp;·&nbsp; ☐ File named per convention</span>
+</div>
+
+</div><!-- /content -->
+
+<div class="footer">
+  <strong>MyoSynex™ Video Editing Template v1.0</strong> &nbsp;·&nbsp; SolidFarma USA Corp &nbsp;·&nbsp; May 2026 &nbsp;·&nbsp; Internal use only
+</div>
+
+</body>
+</html>
